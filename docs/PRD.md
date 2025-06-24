@@ -69,8 +69,34 @@ This document outlines different approaches for implementing a Progressive Web A
 - Consider moving to a framework-based approach (Approach 2) if richer UI features like file browsing become necessary.
 - The server-driven approach (Approach 3) could be used for a rapid prototype but may limit future enhancements.
 
+## Decision
+We have selected **Approach 1: Lightweight PWA Client** as the implementation path. Approaches 2 and 3 remain valuable references and are kept as considered alternatives.
+
+## Considered Alternatives
+- **Approach 2: Framework-based PWA (React or Vue)** – offers a richer UI with a larger client footprint.
+- **Approach 3: Server-driven UI** – minimizes client logic at the expense of flexibility.
+
+## Feature Roadmap for Approach&nbsp;1
+The following tables outline the features to implement for the UI and the API. They are sorted by priority from proof of concept (POC) to a potential future "nice to have" set.
+
+### UI Features
+| Priority       | Features |
+| -------------- | -------- |
+| **POC**        | - Basic chat window and message input field.<br>- Send user messages to the backend and display replies.<br>- Field to specify GitHub repository URL and branch.<br>- Minimal styling and layout. |
+| **MVP**        | - Simple authentication with GitHub OAuth.<br>- Conversation history persisted locally.<br>- Option to set commit messages when the backend proposes changes.<br>- Basic error notifications and loading indicators.<br>- Service worker to cache static assets. |
+| **Public v1**  | - Repository file browser with read-only view.<br>- Syntax-highlighted diff viewer.<br>- Support for multiple conversations and repositories.<br>- Responsive design for mobile.<br>- Offline access to previous chats. |
+| **Nice to have** | - Push notifications for long-running operations.<br>- Dark mode and theming support.<br>- Drag-and-drop file attachments.<br>- Integration to create GitHub pull requests.<br>- User settings panel for preferences. |
+
+### API Features
+| Priority       | Features |
+| -------------- | -------- |
+| **POC**        | - Endpoint to post chat messages and return replies.<br>- Clone repository from provided URL and branch.<br>- Maintain simple conversation state per session. |
+| **MVP**        | - Endpoint to switch branches and commit changes.<br>- Generate diffs between workspace and repository.<br>- Basic token-based authentication.<br>- Handle multiple concurrent sessions. |
+| **Public v1**  | - Multi-user support with role-based permissions.<br>- Webhook integration for GitHub events.<br>- Rate limiting and request logging.<br>- File download and upload endpoints.<br>- Metrics collection for usage monitoring. |
+| **Nice to have** | - Websocket streaming for real-time updates.<br>- Support for multiple repositories per user.<br>- Integration with other git hosts.<br>- Administrative dashboard APIs.<br>- Analytics endpoints for product insights. |
+
 ## Next Steps
-1. Decide on the initial approach.
+1. Confirm the set of features to deliver in the POC.
 2. Define the API contract between frontend and backend.
 3. Outline the architecture for the Docker-based Claude-code backend.
 4. Build a minimal prototype to validate chat interactions and repository integration.
